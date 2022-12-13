@@ -136,7 +136,7 @@ const rejectionWatcher=new WeakMap();
 // }
 
 process.on('unhandledRejection',function(event,promise){
-    if (event.cmd) return;
+    if (event && event.cmd) return;
     //     console.log("caught unhandled rejection. Command still running...");
     //     rejectionWatcher.set(promise,event);
     // } else
