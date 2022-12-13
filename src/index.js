@@ -260,7 +260,13 @@ class SocketStream {
         let holdBuffer=[];
         this.parsed$=this.sentence$
             .do(d=>this.debug>=DEBUG.SILLY&&console.log("Data to parse:",JSON.stringify(d)))
-            .map(o=>o.map(x=>x.split("\r").join("\\r").split("\n").join("\\n")).join('\n')) // Make array string.
+            .map(o=>o.map(x=>{
+                    var abc = (x.split("\r").join("\\r").split("\n").join("\\n")) 
+                    if (abc.endsWith("=")) {
+                        abc += " "
+                    }
+                    return abc
+            }) // Make array string.
             .map(d=>{
                     if (holdBuffer.length) {
                         console.log("Hold buffer:",holdBuffer);
